@@ -3,8 +3,8 @@ import Taro, { Config } from '@tarojs/taro'
 import { View, Text,Button } from '@tarojs/components'
 import './index.less'
 
-import Login from '../../components/login/index'
-import {createCompany} from "@/api"
+// import Login from '../../components/login/index'
+import {createCompany,createRoom,createOrder,getRoomList} from "@/api"
 
 export default class Index extends Component {
 
@@ -27,17 +27,42 @@ export default class Index extends Component {
       logo:"",
       scale:1000,
     }
-    createCompany({data}).then(_=>{
-    debugger
+    createCompany(data).then(_=>{})
+  }
+  createOrder(){
+    const data={
+      organizerId:"212113",
+      roomId:"12112",
+      joinNumber:100,
+    }
+    createOrder(data).then(_=>{})
+  }
 
+  createRoom(){
+    const data={
+      companyId:"121122",
+      name:"国务院测试",
+      position:"2楼",
+      roomNumber:"402",
+      scale:"100人",
+      size:"20平",
+    }
+    createRoom(data).then(_=>{})
+  }
+
+  getRoomList(){
+    getRoomList('121122').then(res=>{
+      console.log(res)
     })
   }
 
   render () {
     return (
       <View className='index'>
-        <Login/>
         <Button onClick={()=>this.createCompany()}>新增公司1</Button>
+        <Button onClick={()=>this.createRoom()}>新增room</Button>
+        <Button onClick={()=>this.createOrder()}>新增order</Button>
+        <Button onClick={()=>this.getRoomList()}>getRoomList</Button>
       </View>
     )
   }
