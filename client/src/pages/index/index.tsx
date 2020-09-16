@@ -4,7 +4,7 @@ import { View, Text,Button } from '@tarojs/components'
 import './index.less'
 
 // import Login from '../../components/login/index'
-import {createCompany,createRoom,createOrder,getRoomList} from "@/api"
+import {createCompany,createRoom,createOrder,getRoomList,cancelOrReceiveOrder} from "@/api"
 
 export default class Index extends Component {
 
@@ -56,6 +56,15 @@ export default class Index extends Component {
     })
   }
 
+  cancelOrReceiveOrder(val){
+    const data={
+      receive:val,
+      orderId:"9170e7955f60dbaf0009164d4923c8f1",
+      userId:"c54dac465f61fcce0016e60f7f421ac6",
+    }
+    cancelOrReceiveOrder(data).then(_=>{})
+  }
+
   render () {
     return (
       <View className='index'>
@@ -63,6 +72,8 @@ export default class Index extends Component {
         <Button onClick={()=>this.createRoom()}>新增room</Button>
         <Button onClick={()=>this.createOrder()}>新增order</Button>
         <Button onClick={()=>this.getRoomList()}>getRoomList</Button>
+        <Button onClick={()=>this.cancelOrReceiveOrder(1)}>接受</Button>
+        <Button onClick={()=>this.cancelOrReceiveOrder(0)}>取消</Button>
       </View>
     )
   }

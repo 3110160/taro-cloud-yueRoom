@@ -78,13 +78,23 @@ export const getOrderList = async ({ id, roomId, organizerId, status = 1, isRece
     }
 }
 
+// orderRelation
+// 取消order // 接受order
+export const cancelOrReceiveOrder = async (data): Promise<boolean> => {
+    try {
+        const res = await db.collection("orderRelation").add({ data })
+        console.log(`取消order || 接受order : `, res)
+        return true
+    } catch ({ errCode }) {
+        toast(errCode)
+        return false
+    }
+}
+
+
 // 单个room 的预约时间表 => order-list 最近几条
 
-// 取消order
 
-// 接受order
-
-// 取消order
 
 // 查询order详情
 
